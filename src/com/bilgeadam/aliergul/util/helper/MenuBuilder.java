@@ -8,6 +8,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
+import com.bilgeadam.aliergul.language.ChooseLanguage;
+
 public class MenuBuilder {
 	private String title = "";
 	private String body = "";
@@ -15,7 +17,7 @@ public class MenuBuilder {
 	private int lineLength = 40;
 	private Map<Object, String> menu;
 	private List<String> listRow;
-	private char icon = '▒';// Alt + 176 = ░ Alt + 177 = ▒ Alt + 178 = ▓
+	private char icon = ChooseLanguage.getInstance.ICON_TABLE().charAt(0);// Alt + 176 = ░ Alt + 177 = ▒ Alt + 178 = ▓
 	private Scanner in = null;
 	private int keyLengthMax = 1;
 	

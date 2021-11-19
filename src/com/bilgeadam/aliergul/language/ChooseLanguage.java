@@ -89,6 +89,11 @@ public enum ChooseLanguage {
 		
 	}
 	
+	public String ICON_TABLE() {
+		return defaultLanguage.getString("Globalization.ICON_TABLE");
+		
+	}
+	
 	public String NOTICE_FOR_THE_NEXT_PRESS_BUTTON() {
 		return defaultLanguage.getString("Globalization.NOTICE_FOR_THE_NEXT_PRESS_BUTTON");
 		
