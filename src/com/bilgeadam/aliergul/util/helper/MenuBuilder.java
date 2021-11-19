@@ -221,7 +221,8 @@ public class MenuBuilder {
 		private int lineCount = 40;
 		private Map<Object, String> menu = null;
 		private List<String> listRow;
-		private char icon = '▒';
+		private char icon = ChooseLanguage.getInstance.ICON_TABLE().charAt(0);// Alt + 176 = ░ Alt + 177 = ▒ Alt + 178 =
+																				// ▓
 		
 		public Builder() {
 			super();
