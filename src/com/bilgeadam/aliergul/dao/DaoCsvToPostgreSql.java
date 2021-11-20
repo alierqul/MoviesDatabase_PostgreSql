@@ -8,13 +8,14 @@ import java.sql.Statement;
 
 import com.bilgeadam.aliergul.language.ChooseLanguage;
 import com.bilgeadam.aliergul.util.database.DatabaseConnection;
+import com.bilgeadam.aliergul.util.database.DatabaseInformation;
 import com.bilgeadam.aliergul.util.helper.FileReaderHelper;
 import com.bilgeadam.aliergul.util.helper.progresbar.MyProgressBar;
 
 public class DaoCsvToPostgreSql implements ICsvProgress {
 	private ChooseLanguage language = ChooseLanguage.getInstance;
 	private final int FORMATTER_SPACE = 27;
-	private final String DATABASE_NAME = "marathonmovies";
+	private final DatabaseInformation info = new DatabaseInformation();
 	
 	@Override
 	public boolean transferCsvoDatabase() {
@@ -53,11 +54,11 @@ public class DaoCsvToPostgreSql implements ICsvProgress {
 	
 	public boolean isThereDatabase() {
 		final String query = "SELECT * FROM pg_database WHERE datname=?;";
-		try (Connection conn = DatabaseConnection.getInstance().getConnMain("transferCsvoDatabase")) {
+		try (Connection conn = DatabaseConnection.getInstance().getConnPostgreSql("transferCsvoDatabase")) {
 			// movieId,title,genres
 			
 			PreparedStatement st = conn.prepareStatement(query);
-			st.setString(1, DATABASE_NAME);
+			st.setString(1, info.getDatabase());
 			ResultSet resut = st.executeQuery();
 			
 			while (resut.next()) {
@@ -76,9 +77,9 @@ public class DaoCsvToPostgreSql implements ICsvProgress {
 	
 	private boolean deleteDatabase() {
 		
-		try (Connection conn = DatabaseConnection.getInstance().getConnMain("transferCsvoDatabase")) {
+		try (Connection conn = DatabaseConnection.getInstance().getConnPostgreSql("transferCsvoDatabase")) {
 			// movieId,title,genres
-			final String query = "DROP DATABASE IF EXISTS " + DATABASE_NAME;
+			final String query = "DROP DATABASE IF EXISTS " + info.getDatabase();
 			Statement st = conn.createStatement();
 			
 			st.executeUpdate(query);
@@ -95,10 +96,10 @@ public class DaoCsvToPostgreSql implements ICsvProgress {
 	}
 	
 	private boolean createdNewDatabase() {
-		try (Connection conn = DatabaseConnection.getInstance().getConnMain("createdNewDatabase")) {
+		try (Connection conn = DatabaseConnection.getInstance().getConnPostgreSql("createdNewDatabase")) {
 			// movieId,title,genres
 			
-			final String query = "CREATE DATABASE  " + DATABASE_NAME
+			final String query = "CREATE DATABASE  " + info.getDatabase()
 					+ " WITH OWNER = postgres ENCODING = 'UTF8' LC_CTYPE = 'Turkish_Turkey.1254' CONNECTION LIMIT = -1;";
 			Statement st = conn.createStatement();
 			

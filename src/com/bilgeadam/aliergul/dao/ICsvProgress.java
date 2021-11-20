@@ -10,7 +10,7 @@ public interface ICsvProgress {
 	public boolean isThereDatabase();
 	
 	public default Connection getConection(String tag) {
-		return DatabaseConnection.getInstance().getConnMarathonMovies("ICsvProgress / " + tag);
+		return DatabaseConnection.getInstance().getConn("ICsvProgress / " + tag);
 		
 	}
 }

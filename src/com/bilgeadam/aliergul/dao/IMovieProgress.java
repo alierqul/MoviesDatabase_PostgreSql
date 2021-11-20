@@ -18,7 +18,7 @@ public interface IMovieProgress {
 	public List<DtoMovie> searchByCategory(String category);
 	
 	public default Connection getConection(String tag) {
-		return DatabaseConnection.getInstance().getConnMarathonMovies("ICsvProgress / " + tag);
+		return DatabaseConnection.getInstance().getConn("ICsvProgress / " + tag);
 		
 	}
 }
