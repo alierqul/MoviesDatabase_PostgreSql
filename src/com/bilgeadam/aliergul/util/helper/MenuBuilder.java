@@ -64,7 +64,8 @@ public class MenuBuilder {
 		String secim;
 		
 		do {
-			
+			try {
+
 			boolean isDigit = true;
 			secim = in.nextLine().trim();
 			for (int i = 0; i < secim.length(); i++) {
@@ -75,6 +76,9 @@ public class MenuBuilder {
 			
 			if (isDigit)
 				return Integer.parseInt(secim);
+			}catch (Exception e) {
+				
+			}
 		} while (true);
 	}
 	
