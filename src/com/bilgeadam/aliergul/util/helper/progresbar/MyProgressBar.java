@@ -1,16 +1,33 @@
 package com.bilgeadam.aliergul.util.helper.progresbar;
 
-public enum MyProgressBar {
-	getInstance;
+public class MyProgressBar implements IProgresbarActionable {
+	private static MyProgressBar instance;
 	
+	private MyProgressBar() {
+		
+	}
+	public static MyProgressBar getInstance() {
+		if(instance== null)
+			instance=new MyProgressBar();
+		return instance;
+	}
+
 	private ProgresBarThread pr = new ProgresBarThread();
 	
-	public void startProgress() {
-		Thread progres = new Thread(pr);
-		progres.start();
+	@Override
+	public void onStartRunable() {
+		 new Thread() {
+			@Override
+			public void run() {
+				pr.onStartRunable();
+			}
+		}.start();	
+		
 	}
-	
-	public void stopProgress() {
+
+	@Override
+	public void onCloseRunable() {
 		pr.getProgresBarThread().onCloseRunable();
+		
 	}
 }

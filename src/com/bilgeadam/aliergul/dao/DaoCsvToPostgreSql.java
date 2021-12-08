@@ -19,7 +19,7 @@ public class DaoCsvToPostgreSql implements ICsvProgress {
 	
 	@Override
 	public boolean transferCsvoDatabase() {
-		MyProgressBar.getInstance.startProgress();
+		MyProgressBar.getInstance().onStartRunable();
 		if (deleteDatabase()) {
 			createdNewDatabase();
 			createdNewTable();
@@ -30,7 +30,7 @@ public class DaoCsvToPostgreSql implements ICsvProgress {
 		} else {
 			System.err.println(language.ERR_OPEN_DATABASE());
 		}
-		MyProgressBar.getInstance.stopProgress();
+		MyProgressBar.getInstance().onCloseRunable();
 		return false;
 	}
 	

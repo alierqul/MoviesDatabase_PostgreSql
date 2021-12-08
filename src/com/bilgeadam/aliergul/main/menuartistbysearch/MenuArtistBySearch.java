@@ -29,7 +29,7 @@ public enum MenuArtistBySearch {
 	}
 	
 	private void searchForClientAndDatabase(String key) {
-		MyProgressBar.getInstance.startProgress();
+		MyProgressBar.getInstance().onStartRunable();
 		ClientTSV client = new ClientTSV();
 		
 		DtoArtist artist = (DtoArtist) client.requestArtistSearch(key);
@@ -72,7 +72,7 @@ public enum MenuArtistBySearch {
 			searchList.addRow(language.LOG_NOT_FOUND());
 			
 		}
-		MyProgressBar.getInstance.stopProgress();
+		MyProgressBar.getInstance().onCloseRunable();
 		searchList.show().readInteger();
 	}
 	

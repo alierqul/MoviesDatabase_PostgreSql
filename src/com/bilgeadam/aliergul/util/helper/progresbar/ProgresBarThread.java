@@ -1,18 +1,24 @@
 package com.bilgeadam.aliergul.util.helper.progresbar;
 
-public class ProgresBarThread implements Runnable, IOnClose {
+public class ProgresBarThread implements  IProgresbarActionable {
 	
 	private boolean isProgressRon = true;
-	private IOnClose progresBarThread;
+	private IProgresbarActionable progresBarThread;
 	
-	public ProgresBarThread() {
-		
+	public IProgresbarActionable getProgresBarThread() {
+		return progresBarThread;
 	}
 	
 	@Override
-	public void run() {
+	public void onCloseRunable() {
+		this.isProgressRon = false;
+		
+	}
+
+	@Override
+	public void onStartRunable() {
 		progresBarThread = this;
-		final String[] icon = { "/", "|", "X", "\\" };
+		final String[] icon ={ ".     ", "..    ", "...   ", " ... ","  ... ","   ...","    ..","     .","      " };
 		isProgressRon = true;
 		while (isProgressRon) {
 			for (int i = 0; i < icon.length; i++) {
@@ -25,15 +31,6 @@ public class ProgresBarThread implements Runnable, IOnClose {
 			}
 		}
 		System.out.println();
-	}
-	
-	public IOnClose getProgresBarThread() {
-		return progresBarThread;
-	}
-	
-	@Override
-	public void onCloseRunable() {
-		this.isProgressRon = false;
 		
 	}
 	
